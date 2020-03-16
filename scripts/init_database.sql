@@ -22,7 +22,7 @@ RETURNS bit
 AS
 BEGIN
 	DECLARE @switch bit
-	IF (SELECT COUNT(*) FROM dbo.Rind WHERE lebendig=1 AND ST_ID=@ST_ID) < (SELECT AnzahlPlaetze FROM dbo.Stall WHERE ID=@ST_ID)
+	IF (SELECT COUNT(*) FROM dbo.Rind WHERE lebendig=1 AND ST_ID=@ST_ID) <= (SELECT AnzahlPlaetze FROM dbo.Stall WHERE ID=@ST_ID)
 	BEGIN
 		SET @switch = 1
 	END
@@ -32,6 +32,7 @@ BEGIN
 	END
 	RETURN @switch 
 END;
+
 /*
  * CREATE FUNCTION FOR CHECKING IF THERE IS ENOUGH OF THE PRODUCT LEFT
  */
@@ -40,7 +41,7 @@ RETURNS bit
 AS
 BEGIN
 	DECLARE @switch bit
-	IF (SELECT SUM(Menge) FROM VerkaufsPosition vp WHERE VK_A_ID=A_ID + @menge) < (SELECT Menge FROM VKArtikel v where A_ID=@A_ID)
+	IF (SELECT SUM(Menge) FROM VerkaufsPosition vp WHERE VK_A_ID=A_ID + @menge) <= (SELECT Menge FROM VKArtikel v where A_ID=@A_ID)
 	BEGIN
 		SET @switch = 1
 	END
