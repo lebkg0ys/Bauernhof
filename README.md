@@ -4,7 +4,7 @@ Es war einmal ein wunderschöner Bauernhof...\
 
 ### Steps:
 1. connect to Database bauernhof 
-2. Execute init_database.sql on database
+2. Execute init_database.sql
 
 
 ### ERM:
