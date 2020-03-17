@@ -61,6 +61,8 @@ CREATE TABLE Rind (
     ID int NOT NULL IDENTITY(1,1),
     Lebendig bit Default 1,
     ST_ID int NOT NULL,
+    Geb_Datum datetime DEFAULT current_timestamp,
+    Sch_Datum datetime Default NULL,
     PRIMARY KEY (ID),
     FOREIGN KEY (ST_ID) REFERENCES Stall(ID),
     CONSTRAINT check_rind CHECK (dbo.check_available_stall(ST_ID) = 1)
@@ -76,6 +78,7 @@ CREATE TABLE Schlachtung (
     Schlachtgewicht float(5),
     R_ID int NOT NULL,
     M_ID int NOT NULL,
+	Datum datetime DEFAULT current_timestamp,
     PRIMARY KEY (ID),
     FOREIGN KEY (R_ID) REFERENCES Rind(ID),
     FOREIGN KEY (M_ID) REFERENCES Mitarbeiter(ID)

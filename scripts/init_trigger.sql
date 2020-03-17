@@ -10,7 +10,7 @@ begin
     select @R_ID=R_ID from inserted
     if (SELECT lebendig from Rind where Rind.ID=@R_ID) = 1
 	begin	
-    	UPDATE Rind set Lebendig=0 WHERE Rind.ID=@R_ID 
+    	UPDATE Rind set Lebendig=0, SchlachtDatum=current_timestamp  WHERE Rind.ID=@R_ID 
 	end
     else
     begin 
